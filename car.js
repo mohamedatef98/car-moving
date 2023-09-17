@@ -11,10 +11,11 @@ function Car(game)
     this._height = 75 / imageAspectRatio;
     this._containerEl = document.getElementById('car')
     this._imageEl = this._containerEl.querySelector('img')
-    this._right = 0
-    this._top = 0
     this._maxRight = game.getMaxRight() - this._width
     this._maxTop = game.getMaxTop() - (this._width + this._height) / 2;
+    this._minTop = (this._width - this._height) / 2;
+    this._right = 0
+    this._top = this._minTop
     this._direction = DIRECTION_LEFT
 
     this._containerEl.style.width = this._width + 'px'
@@ -101,9 +102,9 @@ Car.prototype.goUp = function()
     if (this._directed(DIRECTION_UP))
     {
         this._top -= INCREMENT;
-        if (this._top <= 0)
+        if (this._top <= (this._width - this._height) / 2)
         {
-            this._top = 0
+            this._top = (this._width - this._height) / 2
         }
     }
     this.update()
